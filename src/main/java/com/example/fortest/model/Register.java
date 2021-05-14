@@ -3,6 +3,7 @@ package com.example.fortest.model;
 import java.sql.ResultSet;
 
 public class Register {
+    int userid;
     String fullname;
     String email;
     String address;
@@ -29,6 +30,14 @@ public class Register {
         this.birthdate = resultSet.getString("birthdate");
         this.username = resultSet.getString("username");
         this.password = resultSet.getString("password");
+    }
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
     }
 
     public String getFullname() {

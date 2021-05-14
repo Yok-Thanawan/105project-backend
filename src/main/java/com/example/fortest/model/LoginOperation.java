@@ -5,6 +5,7 @@ import com.example.fortest.utility.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class LoginOperation {
     Connection connection;
@@ -25,10 +26,16 @@ public class LoginOperation {
 
             if (resultSet.next()) {
                 login = new Login(resultSet);
-            }
+            }return login;
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            try {
+                connection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
-        return login;
+        return null;
     }
 }

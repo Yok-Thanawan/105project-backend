@@ -1,9 +1,6 @@
 package com.example.fortest.controller;
 
-import com.example.fortest.model.ErrorResponse;
-import com.example.fortest.model.Login;
-import com.example.fortest.model.LoginOperation;
-import com.google.gson.Gson;
+import com.example.fortest.model.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -17,7 +14,6 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         Middleware.setCORS(request,response);
         try(PrintWriter out = response.getWriter()){
             response.setContentType("text/html;charset=UTF-8");
@@ -33,6 +29,11 @@ public class LoginServlet extends HttpServlet {
                 ErrorResponse errorResponse = new ErrorResponse("wrong username or password", 400);
                 response.setStatus(400);
             }
+            if (login == null) {
+                ErrorResponse errorResponse = new ErrorResponse("Username and/or password are not correct", 400);
+                response.setStatus(400);
+            }
+
             else {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("userid", login.getUserid());

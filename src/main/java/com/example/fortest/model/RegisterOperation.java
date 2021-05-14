@@ -4,24 +4,19 @@ import com.example.fortest.utility.DBConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class RegisterOperation {
     Connection connection;
     PreparedStatement preparedStatement;
-    Register register;
+
     public String register(String fullname, String email, String address, String tel, String birthdate, String username, String password) {
         try {
             connection = DBConnection.getMySQLConnection();
-            //check
-            System.out.println("information");
-            System.out.println(fullname);
-            System.out.println(email);
-            System.out.println(birthdate);
 
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDateTime now = LocalDateTime.now();
 
             preparedStatement = connection.prepareStatement("INSERT INTO User(fullname,email,address,tel,birthdate,username,password,emp_date,salary,role) VALUES  (?,?,?,?,?,?,?,?,?,?)");
@@ -41,6 +36,12 @@ public class RegisterOperation {
 
         }catch (Exception e){
             e.printStackTrace();
+        }finally {
+            try {
+                connection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
         return "Failed";
     }
