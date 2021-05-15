@@ -17,14 +17,9 @@ public class LogoutServlet extends HttpServlet {
         Middleware.setCORS(request, response);
         HttpSession session = request.getSession(false);
         if(session != null){
-            System.out.println("get in");
             session.invalidate();
             response.setStatus(200);
         }
-        else{
-            System.out.println("not in");
-        }
-
     }
 
 }

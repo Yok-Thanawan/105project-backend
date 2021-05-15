@@ -19,9 +19,6 @@ public class RegisterServlet extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
             RegisterOperation registerOperation = new RegisterOperation();
             HttpSession session = request.getSession(false);
-            //check
-            String s = request.getParameter("fullname");
-            System.out.println("servlet " + s);
 
             String signup = registerOperation.register(request.getParameter("fullname"), request.getParameter("email"), request.getParameter("address"), request.getParameter("tel"), request.getParameter("birthdate"), request.getParameter("username"), request.getParameter("password"));
 

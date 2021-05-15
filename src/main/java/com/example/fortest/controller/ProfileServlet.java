@@ -19,11 +19,8 @@ public class ProfileServlet extends HttpServlet {
         Middleware.setCORS(request,response);
         Gson gson = new Gson();
         response.setContentType("application/json");
-        System.out.println("in");
         try(PrintWriter out = response.getWriter()) {
             int userid = Middleware.authCheck(request, response);
-            System.out.println(userid);
-            System.out.println("in try");
             FindbyUserid findbyUserid = new FindbyUserid();
             User finduser = findbyUserid.findbyUserid(userid);
             out.print(gson.toJson(finduser));

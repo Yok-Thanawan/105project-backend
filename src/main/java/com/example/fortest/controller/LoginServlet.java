@@ -21,9 +21,6 @@ public class LoginServlet extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             Login login = loginOperation.checkLogin(username, password);
-            //check
-            System.out.println("User ="+username);
-            System.out.println("Password =" +password);
 
             if(username==null || password==null){
                 ErrorResponse errorResponse = new ErrorResponse("wrong username or password", 400);
